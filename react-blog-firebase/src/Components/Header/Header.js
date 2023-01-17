@@ -1,11 +1,15 @@
 import React from 'react'
 import './Header.css'
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 import { FaHome } from "react-icons/fa";
 import {auth} from '../../Config/firebaseConfig'
 import {useAuthState} from 'react-firebase-hooks/auth'
+import { signOut } from 'firebase/auth';
 
 function Header() {
+
+    //activate navigate
+    let navigate = useNavigate();
 
     //get user data
     const [user] = useAuthState(auth);
@@ -15,7 +19,7 @@ function Header() {
     const categories = ["Health", "Food", "Travel", "Technology"]
   return (
     <div className='header-container'>
-        <FaHome />
+        <FaHome onClick={()=>navigate("/")}/>
         <div className='categories-container'>
             {
                 categories.map((item, index)=> <Link to={`/category/${item}`}
@@ -28,9 +32,11 @@ function Header() {
                 <span className='username'>
                     {user.displayName? user.displayName : user.email}
                 </span>
+                <button className='auth-link'
+                        onClick={()=>signOut(auth)}>Logout</button>
             </div>
             :
-            <button className='auth-link'>Signup</button>
+            <Link to='/auth' className='auth-link'>Signup</Link>
         }
         
     </div>
