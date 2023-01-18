@@ -3,7 +3,7 @@ import './App.css';
 import Header from './Components/Header/Header';
 import Auth from './Pages/Auth/Auth';
 import Homepage from './Pages/Homepage/Homepage';
-
+import AddArticle from './Pages/AddArticle/AddArticle'
 
 
 
@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Homepage />} />
           <Route path='/auth' element={<Auth />} />
+          <Route path='/addarticle' element={<AddArticle />} />
         </Routes>
       </BrowserRouter>
       
